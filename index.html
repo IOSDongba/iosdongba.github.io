@@ -272,8 +272,8 @@
 
           function basicLoad(location) {
             var possible = ['koalas', 'koalas1', 'koalas2', 'koalas3'];
-            // var file = possible[Math.floor(Math.random() * possible.length)] + '.jpg'
-            var file = possible[1] + '.jpg'
+            // var file = 'img/' + possible[Math.floor(Math.random() * possible.length)] + '.jpg'
+            var file = 'img/' + possible[1] + '.jpg'
             return {
               file: file,
               shownFile: location.protocol + '//' + location.host + location.pathname + file
