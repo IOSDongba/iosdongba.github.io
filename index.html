@@ -1,3 +1,4 @@
+
 <html><head>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta charset="utf-8">
@@ -20,6 +21,10 @@
     <link rel="stylesheet" type="text/css" href="http://www.koalastothemax.com/koala.css?1.9.5">
 
     <script type="text/javascript">
+    	document.addEventListener('touchstart',function(e){
+        e.preventDefault();  //阻止浏览器默认事件
+    });
+    	
       var kttmAdTypes = [
         'EasyList',
         'AntiAdblockKiller'
@@ -55,6 +60,33 @@
       Powered by
       <a href="http://d3js.org/">D3</a>
     </div>
+
+    <script type="text/javascript">
+            var overscroll = function(el) {
+          el.addEventListener('touchstart', function() {
+              var top = el.scrollTop
+              ,totalScroll = el.scrollHeight
+              ,currentScroll = top + el.offsetHeight;
+              if(top === 0) {
+                  el.scrollTop = 1;
+              }else if(currentScroll === totalScroll) {
+                  el.scrollTop = top - 1;
+              }
+          });
+       
+          el.addEventListener('touchmove', function(evt) {
+          if(el.offsetHeight < el.scrollHeight)
+              evt._isScroller = true;
+          });
+      }
+              
+      overscroll(document.querySelector('.scroll'));
+      document.body.addEventListener('touchmove', function(evt) {
+          if(!evt._isScroller) {
+              evt.preventDefault();
+          }
+
+    </script>
 
     <script type="text/javascript">
 
@@ -272,8 +304,8 @@
 
           function basicLoad(location) {
             var possible = ['koalas', 'koalas1', 'koalas2', 'koalas3'];
-            // var file = 'img/' + possible[Math.floor(Math.random() * possible.length)] + '.jpg'
-            var file = 'img/' + possible[1] + '.jpg'
+            // var file = possible[Math.floor(Math.random() * possible.length)] + '.jpg'
+            var file = possible[1] + '.jpg'
             return {
               file: file,
               shownFile: location.protocol + '//' + location.host + location.pathname + file
